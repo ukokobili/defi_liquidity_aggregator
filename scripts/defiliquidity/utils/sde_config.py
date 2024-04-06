@@ -1,6 +1,6 @@
 import os
 
-from defiliquidity.utils.db import DBConnection
+from utils.db import DBConnection
 
 
 def get_warehouse_creds() -> DBConnection:

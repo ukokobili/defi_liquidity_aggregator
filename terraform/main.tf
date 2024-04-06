@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.16"
+      version = "~> 4.66.0"
     }
   }
 
@@ -110,10 +110,10 @@ sudo chmod 666 /var/run/docker.sock
 sudo apt install make
 
 echo 'Clone git repo to EC2'
-cd /home/ubuntu && git clone https://github.com/josephmachado/bitcoinMonitor.git
+cd /home/ubuntu && git clone https://github.com/ukokobili/defi_liquidity_aggregator
 
-echo 'CD to bitcoinMonitor directory'
-cd bitcoinMonitor
+echo 'CD to defi_liquidity_aggregator directory'
+cd defi_liquidity_aggregator
 
 echo 'Start containers'
 make up

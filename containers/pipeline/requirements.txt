@@ -7,6 +7,8 @@ pytest==8.1.1
 pytest-mock==3.14.0
 apache-airflow-client==2.8.0
 yoyo-migrations==8.2.0
-duckdb==0.9.2
-streamlit==1.32.2
 gql[all]==3.5.0
+psycopg2
+requests
+boto3
+types-requests
