@@ -1,36 +1,39 @@
+####################################################################################################################
+# Setup containers to run Airflow
+
 docker-spin-up:
-	docker compose --env-file env up --build -d
+	docker compose --env-file env up airflow-init && docker compose --env-file env up --build -d
 
-sleeper:
-	sleep 15
+perms:
+	sudo mkdir -p logs plugins temp dags tests migrations && sudo chmod -R u=rwx,g=rwx,o=rwx logs plugins temp dags tests migrations
 
-up: docker-spin-up sleeper warehouse-migration
+up: perms docker-spin-up warehouse-migration
 
-down: 
-	docker compose --env-file env down
+down:
+	docker compose down
 
-shell:
-	docker exec -ti defi_pipeline bash
+sh:
+	docker exec -ti webserver bash
 
-format:
-	docker exec defi_pipeline python -m black -S --line-length 79 .
-
-isort:
-	docker exec defi_pipeline isort .
+####################################################################################################################
+# Testing, auto formatting, type checks, & Lint checks
 
 pytest:
-	docker exec defi_pipeline pytest /code/test
+	docker exec webserver pytest -p no:warnings -v /opt/airflow/tests
+
+format:
+	docker exec webserver python -m black -S --line-length 79 .
+
+isort:
+	docker exec webserver isort .
 
 type:
-	docker exec defi_pipeline mypy --ignore-missing-imports /code
+	docker exec webserver mypy --ignore-missing-imports /opt/airflow
 
 lint: 
-	docker exec defi_pipeline flake8 /code 
+	docker exec webserver flake8 /opt/airflow/dags
 
 ci: isort format type lint pytest
-
-stop-etl: 
-	docker exec defi_pipeline service cron stop
 
 ####################################################################################################################
 # Set up cloud infrastructure
@@ -48,22 +51,25 @@ infra-config:
 	terraform -chdir=./terraform output
 
 ####################################################################################################################
-# Datawarehouse migration
+# Create tables in Warehouse
 
 db-migration:
-	@read -p "Enter migration name:" migration_name; docker exec defi_pipeline yoyo new ./migrations -m "$$migration_name"
+	@read -p "Enter migration name:" migration_name; docker exec webserver yoyo new ./migrations -m "$$migration_name"
 
 warehouse-migration:
-	docker exec defi_pipeline yoyo develop --no-config-file --database postgres://root:root@tokendb:5432/defi ./migrations
+	docker exec webserver yoyo develop --no-config-file --database postgres://sdeuser:sdepassword1234@warehouse:5432/finance ./migrations
 
 warehouse-rollback:
-	docker exec defi_pipeline yoyo rollback --no-config-file --database postgres://root:root@tokendb:5432/defi ./migrations
+	docker exec webserver yoyo rollback --no-config-file --database postgres://sdeuser:sdepassword1234@warehouse:5432/finance ./migrations
 
 ####################################################################################################################
 # Port forwarding to local machine
 
 cloud-metabase:
 	terraform -chdir=./terraform output -raw private_key > private_key.pem && chmod 600 private_key.pem && ssh -o "IdentitiesOnly yes" -i private_key.pem ubuntu@$$(terraform -chdir=./terraform output -raw ec2_public_dns) -N -f -L 3001:$$(terraform -chdir=./terraform output -raw ec2_public_dns):3000 && open http://localhost:3001 && rm private_key.pem
+
+cloud-airflow:
+	terraform -chdir=./terraform output -raw private_key > private_key.pem && chmod 600 private_key.pem && ssh -o "IdentitiesOnly yes" -i private_key.pem ubuntu@$$(terraform -chdir=./terraform output -raw ec2_public_dns) -N -f -L 8081:$$(terraform -chdir=./terraform output -raw ec2_public_dns):8080 && open http://localhost:8081 && rm private_key.pem
 
 ####################################################################################################################
 # Helpers

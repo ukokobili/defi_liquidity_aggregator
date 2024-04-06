@@ -3,10 +3,9 @@ import datetime
 from decimal import Decimal
 
 import psycopg2
-
-from scripts.defiliquidity.liquidity_aggregator import run_pipeline
-from scripts.defiliquidity.utils.db import WarehouseConnection
-from scripts.defiliquidity.utils.sde_config import get_warehouse_creds
+from defiliquidity.liquidity_aggregator import run_pipeline
+from defiliquidity.utils.db import WarehouseConnection
+from defiliquidity.utils.sde_config import get_warehouse_creds
 
 
 class TestDefiLiquidity:
