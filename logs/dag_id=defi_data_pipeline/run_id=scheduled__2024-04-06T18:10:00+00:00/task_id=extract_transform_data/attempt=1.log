@@ -1,0 +1,14 @@
+[2024-04-06T22:32:53.043+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: defi_data_pipeline.extract_transform_data scheduled__2024-04-06T18:10:00+00:00 [queued]>
+[2024-04-06T22:32:53.112+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: defi_data_pipeline.extract_transform_data scheduled__2024-04-06T18:10:00+00:00 [queued]>
+[2024-04-06T22:32:53.113+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-04-06T22:32:54.451+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): extract_transform_data> on 2024-04-06 18:10:00+00:00
+[2024-04-06T22:32:54.517+0000] {standard_task_runner.py:60} INFO - Started process 11205 to run task
+[2024-04-06T22:32:54.535+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'defi_data_pipeline', 'extract_transform_data', 'scheduled__2024-04-06T18:10:00+00:00', '--job-id', '310', '--raw', '--subdir', 'DAGS_FOLDER/_etl.py', '--cfg-path', '/tmp/tmpynrf9h9y']
+[2024-04-06T22:32:54.607+0000] {standard_task_runner.py:88} INFO - Job 310: Subtask extract_transform_data
+[2024-04-06T22:32:54.741+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2024-04-06T22:32:54.987+0000] {task_command.py:423} INFO - Running <TaskInstance: defi_data_pipeline.extract_transform_data scheduled__2024-04-06T18:10:00+00:00 [running]> on host aa86d21a7ebc
+[2024-04-06T22:32:56.094+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='defi_data_pipeline' AIRFLOW_CTX_TASK_ID='extract_transform_data' AIRFLOW_CTX_EXECUTION_DATE='2024-04-06T18:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-04-06T18:10:00+00:00'
+[2024-04-06T22:32:56.901+0000] {python.py:201} INFO - Done. Returned value was: None
+[2024-04-06T22:32:56.952+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=defi_data_pipeline, task_id=extract_transform_data, execution_date=20240406T181000, start_date=20240406T223253, end_date=20240406T223256
+[2024-04-06T22:32:57.129+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-04-06T22:32:57.273+0000] {taskinstance.py:3281} INFO - 1 downstream tasks scheduled from follow-on schedule check

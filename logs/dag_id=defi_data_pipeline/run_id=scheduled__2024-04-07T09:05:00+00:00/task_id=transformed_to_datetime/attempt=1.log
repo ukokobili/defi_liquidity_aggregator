@@ -1,0 +1,36 @@
+[2024-04-07T10:07:26.869+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: defi_data_pipeline.transformed_to_datetime scheduled__2024-04-07T09:05:00+00:00 [queued]>
+[2024-04-07T10:07:26.895+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: defi_data_pipeline.transformed_to_datetime scheduled__2024-04-07T09:05:00+00:00 [queued]>
+[2024-04-07T10:07:26.896+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-04-07T10:07:27.180+0000] {taskinstance.py:2192} INFO - Executing <Task(_PythonDecoratedOperator): transformed_to_datetime> on 2024-04-07 09:05:00+00:00
+[2024-04-07T10:07:27.188+0000] {standard_task_runner.py:60} INFO - Started process 27565 to run task
+[2024-04-07T10:07:27.198+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'defi_data_pipeline', 'transformed_to_datetime', 'scheduled__2024-04-07T09:05:00+00:00', '--job-id', '359', '--raw', '--subdir', 'DAGS_FOLDER/_etl.py', '--cfg-path', '/tmp/tmpcac85p5z']
+[2024-04-07T10:07:27.203+0000] {standard_task_runner.py:88} INFO - Job 359: Subtask transformed_to_datetime
+[2024-04-07T10:07:27.235+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2024-04-07T10:07:27.335+0000] {task_command.py:423} INFO - Running <TaskInstance: defi_data_pipeline.transformed_to_datetime scheduled__2024-04-07T09:05:00+00:00 [running]> on host aa86d21a7ebc
+[2024-04-07T10:07:27.482+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='defi_data_pipeline' AIRFLOW_CTX_TASK_ID='transformed_to_datetime' AIRFLOW_CTX_EXECUTION_DATE='2024-04-07T09:05:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-04-07T09:05:00+00:00'
+[2024-04-07T10:07:27.511+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/decorators/base.py", line 242, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/_etl.py", line 59, in transformed_to_datetime
+    transformed_data.columns = columns
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 6002, in __setattr__
+    return object.__setattr__(self, name, value)
+  File "pandas/_libs/properties.pyx", line 69, in pandas._libs.properties.AxisProperty.__set__
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 730, in _set_axis
+    self._mgr.set_axis(axis, labels)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/internals/managers.py", line 225, in set_axis
+    self._validate_set_axis(axis, new_labels)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/internals/base.py", line 70, in _validate_set_axis
+    raise ValueError(
+ValueError: Length mismatch: Expected axis has 1 elements, new values have 6 elements
+[2024-04-07T10:07:27.529+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=defi_data_pipeline, task_id=transformed_to_datetime, execution_date=20240407T090500, start_date=20240407T100726, end_date=20240407T100727
+[2024-04-07T10:07:27.548+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 359 for task transformed_to_datetime (Length mismatch: Expected axis has 1 elements, new values have 6 elements; 27565)
+[2024-04-07T10:07:27.579+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-04-07T10:07:27.605+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

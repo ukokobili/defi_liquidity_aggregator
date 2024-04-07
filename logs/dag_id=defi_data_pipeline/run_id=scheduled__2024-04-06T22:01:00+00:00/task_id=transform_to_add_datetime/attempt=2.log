@@ -1,0 +1,36 @@
+[2024-04-06T23:08:35.429+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: defi_data_pipeline.transform_to_add_datetime scheduled__2024-04-06T22:01:00+00:00 [queued]>
+[2024-04-06T23:08:35.524+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: defi_data_pipeline.transform_to_add_datetime scheduled__2024-04-06T22:01:00+00:00 [queued]>
+[2024-04-06T23:08:35.524+0000] {taskinstance.py:2171} INFO - Starting attempt 2 of 2
+[2024-04-06T23:08:36.076+0000] {taskinstance.py:2192} INFO - Executing <Task(_PythonDecoratedOperator): transform_to_add_datetime> on 2024-04-06 22:01:00+00:00
+[2024-04-06T23:08:36.089+0000] {standard_task_runner.py:60} INFO - Started process 13555 to run task
+[2024-04-06T23:08:36.102+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'defi_data_pipeline', 'transform_to_add_datetime', 'scheduled__2024-04-06T22:01:00+00:00', '--job-id', '327', '--raw', '--subdir', 'DAGS_FOLDER/_etl.py', '--cfg-path', '/tmp/tmpm1pdxdh9']
+[2024-04-06T23:08:36.108+0000] {standard_task_runner.py:88} INFO - Job 327: Subtask transform_to_add_datetime
+[2024-04-06T23:08:36.260+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2024-04-06T23:08:36.383+0000] {task_command.py:423} INFO - Running <TaskInstance: defi_data_pipeline.transform_to_add_datetime scheduled__2024-04-06T22:01:00+00:00 [running]> on host aa86d21a7ebc
+[2024-04-06T23:08:36.667+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='defi_data_pipeline' AIRFLOW_CTX_TASK_ID='transform_to_add_datetime' AIRFLOW_CTX_EXECUTION_DATE='2024-04-06T22:01:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-04-06T22:01:00+00:00'
+[2024-04-06T23:08:36.703+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/decorators/base.py", line 242, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/_etl.py", line 70, in transform_to_add_datetime
+    df['updated_dt'] = df['updated_dt'].apply(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/series.py", line 4630, in apply
+    return SeriesApply(self, func, convert_dtype, args, kwargs).apply()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/apply.py", line 1025, in apply
+    return self.apply_standard()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/apply.py", line 1076, in apply_standard
+    mapped = lib.map_infer(
+  File "pandas/_libs/lib.pyx", line 2834, in pandas._libs.lib.map_infer
+  File "/opt/airflow/dags/_etl.py", line 71, in <lambda>
+    lambda x: str(x.replace(tzinfo=None))
+AttributeError: 'PlainXComArg' object has no attribute 'replace'
+[2024-04-06T23:08:36.732+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=defi_data_pipeline, task_id=transform_to_add_datetime, execution_date=20240406T220100, start_date=20240406T230835, end_date=20240406T230836
+[2024-04-06T23:08:36.759+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 327 for task transform_to_add_datetime ('PlainXComArg' object has no attribute 'replace'; 13555)
+[2024-04-06T23:08:36.808+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-04-06T23:08:36.868+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

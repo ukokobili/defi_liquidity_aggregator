@@ -110,16 +110,13 @@ sudo chmod 666 /var/run/docker.sock
 sudo apt install make
 
 echo 'Clone git repo to EC2'
-cd /home/ubuntu && git clone https://github.com/ukokobili/defi_liquidity_aggregator
+cd /home/ubuntu && git clone ${var.repo_url}
 
-echo 'CD to defi_liquidity_aggregator directory'
-cd defi_liquidity_aggregator
+echo 'CD to data_engineering_project_template directory'
+cd data_engineering_project_template
 
-echo 'Start containers'
+echo 'Start containers & Run db migrations'
 make up
-
-echo 'Run db migrations'
-sleep 120 && make warehouse-migration
 
 echo "-------------------------END SETUP---------------------------"
 
@@ -134,7 +131,7 @@ resource "aws_budgets_budget" "ec2" {
   limit_amount      = "5"
   limit_unit        = "USD"
   time_period_end   = "2087-06-15_00:00"
-  time_period_start = "2024-04-05_00:00"
+  time_period_start = "2022-10-22_00:00"
   time_unit         = "MONTHLY"
 
   notification {

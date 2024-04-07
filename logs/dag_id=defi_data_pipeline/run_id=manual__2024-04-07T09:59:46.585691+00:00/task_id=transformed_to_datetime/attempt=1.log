@@ -1,0 +1,29 @@
+[2024-04-07T09:59:50.420+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: defi_data_pipeline.transformed_to_datetime manual__2024-04-07T09:59:46.585691+00:00 [queued]>
+[2024-04-07T09:59:50.794+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: defi_data_pipeline.transformed_to_datetime manual__2024-04-07T09:59:46.585691+00:00 [queued]>
+[2024-04-07T09:59:50.794+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-04-07T09:59:50.829+0000] {taskinstance.py:2192} INFO - Executing <Task(_PythonDecoratedOperator): transformed_to_datetime> on 2024-04-07 09:59:46.585691+00:00
+[2024-04-07T09:59:50.847+0000] {standard_task_runner.py:60} INFO - Started process 27075 to run task
+[2024-04-07T09:59:50.861+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'defi_data_pipeline', 'transformed_to_datetime', 'manual__2024-04-07T09:59:46.585691+00:00', '--job-id', '353', '--raw', '--subdir', 'DAGS_FOLDER/_etl.py', '--cfg-path', '/tmp/tmpvk_b17bw']
+[2024-04-07T09:59:50.866+0000] {standard_task_runner.py:88} INFO - Job 353: Subtask transformed_to_datetime
+[2024-04-07T09:59:50.913+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2024-04-07T09:59:51.039+0000] {task_command.py:423} INFO - Running <TaskInstance: defi_data_pipeline.transformed_to_datetime manual__2024-04-07T09:59:46.585691+00:00 [running]> on host aa86d21a7ebc
+[2024-04-07T09:59:51.353+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='defi_data_pipeline' AIRFLOW_CTX_TASK_ID='transformed_to_datetime' AIRFLOW_CTX_EXECUTION_DATE='2024-04-07T09:59:46.585691+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-04-07T09:59:46.585691+00:00'
+[2024-04-07T09:59:51.407+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/decorators/base.py", line 242, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/_etl.py", line 73, in transformed_to_datetime
+    transformed_data = pd.DataFrame(ti).T.reset_index()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 817, in __init__
+    raise ValueError("DataFrame constructor not properly called!")
+ValueError: DataFrame constructor not properly called!
+[2024-04-07T09:59:51.502+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=defi_data_pipeline, task_id=transformed_to_datetime, execution_date=20240407T095946, start_date=20240407T095950, end_date=20240407T095951
+[2024-04-07T09:59:51.553+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 353 for task transformed_to_datetime (DataFrame constructor not properly called!; 27075)
+[2024-04-07T09:59:51.579+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-04-07T09:59:51.631+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

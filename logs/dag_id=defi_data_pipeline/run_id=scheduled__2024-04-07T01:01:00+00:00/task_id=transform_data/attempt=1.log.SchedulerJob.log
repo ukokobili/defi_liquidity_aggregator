@@ -1,0 +1,1 @@
+[2024-04-07T02:01:26.212+0000] {scheduler_job_runner.py:781} ERROR - Executor reports task instance <TaskInstance: defi_data_pipeline.transform_data scheduled__2024-04-07T01:01:00+00:00 [queued]> finished (failed) although the task says it's queued. (Info: None) Was the task killed externally?

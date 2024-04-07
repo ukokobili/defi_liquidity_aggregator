@@ -1,0 +1,20 @@
+[2024-04-07T12:00:54.120+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: defi_data_pipeline.transformed_to_datetime scheduled__2024-04-07T10:01:00+00:00 [queued]>
+[2024-04-07T12:00:54.135+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: defi_data_pipeline.transformed_to_datetime scheduled__2024-04-07T10:01:00+00:00 [queued]>
+[2024-04-07T12:00:54.136+0000] {taskinstance.py:2171} INFO - Starting attempt 3 of 3
+[2024-04-07T12:00:54.362+0000] {taskinstance.py:2192} INFO - Executing <Task(_PythonDecoratedOperator): transformed_to_datetime> on 2024-04-07 10:01:00+00:00
+[2024-04-07T12:00:54.369+0000] {standard_task_runner.py:60} INFO - Started process 34697 to run task
+[2024-04-07T12:00:54.378+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'defi_data_pipeline', 'transformed_to_datetime', 'scheduled__2024-04-07T10:01:00+00:00', '--job-id', '372', '--raw', '--subdir', 'DAGS_FOLDER/_etl.py', '--cfg-path', '/tmp/tmp16sw3f4l']
+[2024-04-07T12:00:54.381+0000] {standard_task_runner.py:88} INFO - Job 372: Subtask transformed_to_datetime
+[2024-04-07T12:00:54.407+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2024-04-07T12:00:54.483+0000] {task_command.py:423} INFO - Running <TaskInstance: defi_data_pipeline.transformed_to_datetime scheduled__2024-04-07T10:01:00+00:00 [running]> on host aa86d21a7ebc
+[2024-04-07T12:00:54.649+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='defi_data_pipeline' AIRFLOW_CTX_TASK_ID='transformed_to_datetime' AIRFLOW_CTX_EXECUTION_DATE='2024-04-07T10:01:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-04-07T10:01:00+00:00'
+[2024-04-07T12:00:54.662+0000] {python.py:201} INFO - Done. Returned value was:   token_name          usd  ...  last_updated_at           updated_dt
+0    bitcoin  69375.49885  ...     1.712491e+09  2024-04-07 12:00:45
+1   ethereum   3391.38232  ...     1.712491e+09  2024-04-07 12:00:33
+2   marscoin      0.09649  ...     1.712491e+09  2024-04-07 11:57:19
+3     solana    180.70572  ...     1.712491e+09  2024-04-07 12:00:27
+
+[4 rows x 7 columns]
+[2024-04-07T12:00:54.741+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=defi_data_pipeline, task_id=transformed_to_datetime, execution_date=20240407T100100, start_date=20240407T120054, end_date=20240407T120054
+[2024-04-07T12:00:54.790+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-04-07T12:00:54.828+0000] {taskinstance.py:3281} INFO - 1 downstream tasks scheduled from follow-on schedule check

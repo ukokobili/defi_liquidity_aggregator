@@ -1,0 +1,37 @@
+[2024-04-06T22:31:43.644+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: defi_data_pipeline.extract_transform_data scheduled__2024-04-06T09:10:00+00:00 [queued]>
+[2024-04-06T22:31:44.182+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: defi_data_pipeline.extract_transform_data scheduled__2024-04-06T09:10:00+00:00 [queued]>
+[2024-04-06T22:31:44.183+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-04-06T22:31:56.735+0000] {taskinstance.py:2192} INFO - Executing <Task(PythonOperator): extract_transform_data> on 2024-04-06 09:10:00+00:00
+[2024-04-06T22:31:56.786+0000] {standard_task_runner.py:60} INFO - Started process 11120 to run task
+[2024-04-06T22:31:56.991+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'defi_data_pipeline', 'extract_transform_data', 'scheduled__2024-04-06T09:10:00+00:00', '--job-id', '286', '--raw', '--subdir', 'DAGS_FOLDER/_etl.py', '--cfg-path', '/tmp/tmpwnqpfhth']
+[2024-04-06T22:31:57.027+0000] {standard_task_runner.py:88} INFO - Job 286: Subtask extract_transform_data
+[2024-04-06T22:31:57.657+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2024-04-06T22:31:59.399+0000] {task_command.py:423} INFO - Running <TaskInstance: defi_data_pipeline.extract_transform_data scheduled__2024-04-06T09:10:00+00:00 [running]> on host aa86d21a7ebc
+[2024-04-06T22:32:03.528+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='defi_data_pipeline' AIRFLOW_CTX_TASK_ID='extract_transform_data' AIRFLOW_CTX_EXECUTION_DATE='2024-04-06T09:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-04-06T09:10:00+00:00'
+[2024-04-06T22:32:07.239+0000] {logging_mixin.py:188} INFO - Failed to fetch data: 429
+[2024-04-06T22:32:07.445+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/scripts/_python/liquidity_aggregator.py", line 62, in run_pipeline
+    data_frame = transform_to_add_datetime(token_data)
+  File "/opt/airflow/dags/scripts/_python/liquidity_aggregator.py", line 49, in transform_to_add_datetime
+    df.columns = columns
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 6002, in __setattr__
+    return object.__setattr__(self, name, value)
+  File "pandas/_libs/properties.pyx", line 69, in pandas._libs.properties.AxisProperty.__set__
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 730, in _set_axis
+    self._mgr.set_axis(axis, labels)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/internals/managers.py", line 225, in set_axis
+    self._validate_set_axis(axis, new_labels)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/internals/base.py", line 70, in _validate_set_axis
+    raise ValueError(
+ValueError: Length mismatch: Expected axis has 1 elements, new values have 6 elements
+[2024-04-06T22:32:07.547+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=defi_data_pipeline, task_id=extract_transform_data, execution_date=20240406T091000, start_date=20240406T223143, end_date=20240406T223207
+[2024-04-06T22:32:10.456+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 286 for task extract_transform_data (Length mismatch: Expected axis has 1 elements, new values have 6 elements; 11120)
+[2024-04-06T22:32:11.179+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-04-06T22:32:11.984+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
