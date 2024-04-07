@@ -2,7 +2,7 @@
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "eu-north-1"
+  default     = "us-east-1"
 }
 
 ## Key to allow connection to our EC2 instance
@@ -24,4 +24,11 @@ variable "alert_email_id" {
   description = "Email id to send alerts to "
   type        = string
   default     = "ukokobili.jacob@gmail.com"
+}
+
+## Your repository url
+variable "repo_url" {
+  description = "Repository url to clone into production machine"
+  type        = string
+  default     = "https://github.com/ukokobili/defi_liquidity_aggregator"
 }

@@ -131,7 +131,7 @@ resource "aws_budgets_budget" "ec2" {
   limit_amount      = "5"
   limit_unit        = "USD"
   time_period_end   = "2087-06-15_00:00"
-  time_period_start = "2022-10-22_00:00"
+  time_period_start = "2024-04-07_00:00"
   time_unit         = "MONTHLY"
 
   notification {
